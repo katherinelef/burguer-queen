@@ -3,6 +3,7 @@ import Header from './components/Header';
 
 import './App.css';
 import ProductList from './components/ProductList';
+import ShoppingCard from './components/ShoppingCard';
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <ProductList />
+        <ShoppingCard />
       </div>
     );
   }
