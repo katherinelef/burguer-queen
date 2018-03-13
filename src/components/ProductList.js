@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './ProductList.css';
 
-
- 
   class ProductList extends Component {
     constructor() {
       super();
@@ -27,16 +25,19 @@ import './ProductList.css';
   
     render() {
       return (
-        <div class="card-group">
+        <div class="card-group col-9">
           {this.state.products.map(product =>
-            <div className="card"  key={product.id}>
+          <div class="col-3">
+            <div className="card m-3"  key={product.id}>
               <img className="card-img-top" src={product.image} alt={product.name} />
-            <div className="card-body">
-              <h4 className="card-title">{product.name}</h4>
-              <p className="card-text">
-                <button onClick={() => this.addToCart(product)}  disabled={product.inventory <= 0}>S/.{product.price} </button>
-            </p>
-          </div>
+              <div className="card-body">
+              <h4 className="card-title text-center">{product.name}</h4>
+              <h4 className="card-title text-center">S/.{product.price}</h4>
+                <p className="card-text">
+                  <button className= "btn" onClick={() => this.addToCart(product)}>Comprar</button>
+               </p>
+              </div>
+            </div>
           </div>
           )}
         </div>
