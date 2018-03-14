@@ -5,4 +5,13 @@ const addToCart = product => {
       }
 };
 
-export { addToCart}
+const removeFromCart = product => {
+    return{
+        type: "REMOVE_FROM_CART",
+        product
+    }
+}
+
+export { addToCart, removeFromCart}
+
+

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './ShoppingCart.css';
 import store from '../store';
+import {removeFromCart} from '../actionCreatores';
 
 const styles = {
   footer: {
@@ -26,7 +28,7 @@ class ShoppingCart extends Component {
 
   render() {
     return (
-      <div header="Shopping Cart">
+      <div header="Shopping Cart" className="col-4">
 
         <div fill>
 
@@ -35,7 +37,7 @@ class ShoppingCart extends Component {
               <div key={product.id}>
                 <div>{product.name}</div>
                 <div className="text-right">${product.price}</div>
-                <div className="text-right"><button bsSize="xsmall" bsStyle="danger" onClick={() => this.removeFromCart(product)}></button></div>
+                <div className="text-right"><button  onClick={() => this.removeFromCart(product)}>Eliminar</button></div>
               </div>
             )}
           </div>
@@ -54,7 +56,7 @@ class ShoppingCart extends Component {
   }
 
   removeFromCart(product) {
-
+    store.dispatch(removeFromCart(product));
   }
 }
 

@@ -4,16 +4,16 @@ import Header from './components/Header';
 import './App.css';
 import ProductList from './components/ProductList';
 import Breakfast from './components/Breakfast';
-import ShoppingCard from './components/ShoppingCard';
+import ShoppingCart from './components/ShoppingCart';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
-        <ProductList />
         <Breakfast />
-        <ShoppingCard />
+        <ProductList />
+        <ShoppingCart />
       </div>
     );
   }
