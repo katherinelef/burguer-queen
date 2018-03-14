@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './ProductList.css';
+import store from '../store';
+import {addToCart} from '../actionCreatores';
 
   class ProductList extends Component {
     constructor() {
@@ -25,26 +27,34 @@ import './ProductList.css';
   
     render() {
       return (
-        <div class="card-group col-9">
-          {this.state.products.map(product =>
-          <div class="col-3">
-            <div className="card m-3"  key={product.id}>
-              <img className="card-img-top" src={product.image} alt={product.name} />
-              <div className="card-body">
-              <h4 className="card-title text-center">{product.name}</h4>
-              <h4 className="card-title text-center">S/.{product.price}</h4>
-                <p className="card-text">
-                  <button className= "btn" onClick={() => this.addToCart(product)}>Comprar</button>
-               </p>
+        <div className="col-9">
+          <div>
+            <h1 className="text-center m-5"> Menú Hamburguesas </h1>
+          </div>
+          <div class="card-group ">
+            {this.state.products.map(product =>
+            <div class="col-3">
+              <div className="card m-3"  key={product.id}>
+                <img className="card-img-top" src={product.image} alt={product.name} />
+                <div className="card-body">
+                <h4 className="card-title text-center">{product.name}</h4>
+                <h4 className="card-title text-center">S/.{product.price}</h4>
+                  <p className="card-text">
+                    <button className= "btn" onClick={() => this.addToCart(product)}>Comprar</button>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
           )}
+          </div>
         </div>
+        
       );
     }
   
     addToCart(product) {
+
+      store.dispatch(addToCart(product));
   
     }
   }

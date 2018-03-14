@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import store from '../store';
 
 
 const styles = {
@@ -16,6 +17,12 @@ class ShoppingCart extends Component {
     this.state = {
       cart: []
     }
+
+    store.subscribe(() => {
+      this.setState({
+        cart: store.getState().cart
+      });
+    });
   }
 
   render() {
