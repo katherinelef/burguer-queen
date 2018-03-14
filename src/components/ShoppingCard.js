@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import store from '../store';
 
-
 const styles = {
   footer: {
     fontWeight: 'bold'
@@ -28,7 +27,9 @@ class ShoppingCart extends Component {
   render() {
     return (
       <div header="Shopping Cart">
-        
+
+        <div fill>
+
           <div>
             {this.state.cart.map(product =>
               <div key={product.id}>
@@ -38,14 +39,15 @@ class ShoppingCart extends Component {
               </div>
             )}
           </div>
-          <tfoot>
+          <div>
             <div>
               <div colSpan="4" style={styles.footer}>
                 Total: ${this.state.cart.reduce((sum, product) => sum + product.price, 0)}
               </div>
             </div>
-          </tfoot>
-        
+
+          </div>
+        </div>
 
       </div>
     )
