@@ -1,0 +1,9 @@
+.card {
+    width: 300px;
+}
+
+.btn {
+    background-color: brown;
+    color: white;
+    transform: translateX(100%);
+}

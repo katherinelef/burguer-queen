@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import store from '../store';
 
 const styles = {
   footer: {
@@ -15,12 +16,20 @@ class ShoppingCart extends Component {
     this.state = {
       cart: []
     }
+
+    store.subscribe(() => {
+      this.setState({
+        cart: store.getState().cart
+      });
+    });
   }
 
   render() {
     return (
       <div header="Shopping Cart">
+
         <div fill>
+
           <div>
             {this.state.cart.map(product =>
               <div key={product.id}>
@@ -36,6 +45,7 @@ class ShoppingCart extends Component {
                 Total: ${this.state.cart.reduce((sum, product) => sum + product.price, 0)}
               </div>
             </div>
+
           </div>
         </div>
 
