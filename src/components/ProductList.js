@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import './ProductList.css';
-import store from '../store';
 import {addToCart} from '../actionCreatores';
+import { connect } from 'react-redux';
 
-  class ProductList extends Component {
-    constructor() {
-      super();
-
-      this.addToCart = this.addToCart.bind(this);
-  
-      this.state = {
-        products: [
+ const ProductList =({products,addToCart}) =>{
+    
+        products = [
           { id: 1, name: "Simple res", price: 10, image: "https://image.ibb.co/gsFbhx/carne.jpg"  },
           { id: 2, name: "Simple pollo", price: 10, image: "https://image.ibb.co/e3pK2x/hamburguesa.jpg"  },
           { id: 3, name: "Simple vegetariana", price: 10, image: "https://image.ibb.co/fA1Ghx/vegetariana.jpg"  },
@@ -22,17 +17,14 @@ import {addToCart} from '../actionCreatores';
           { id: 6, name: "Agua", price: 5, image: "https://image.ibb.co/hqTXpc/agua.jpg" },
           { id: 6, name: "Gaseosa", price: 7, image: "https://image.ibb.co/eYRMFH/gaseosa.jpg"  },
         ]
-      }
-    }
-  
-    render() {
+     
       return (
         <div className="col-9">
           <div>
             <h1 className="text-center m-5"> Menú Hamburguesas </h1>
           </div>
           <div class="card-group ">
-            {this.state.products.map(product =>
+            {products.map(product =>
             <div class="col-3">
               <div className="card m-3"  key={product.id}>
                 <img className="card-img-top" src={product.image} alt={product.name} />
@@ -40,7 +32,7 @@ import {addToCart} from '../actionCreatores';
                 <h4 className="card-title text-center">{product.name}</h4>
                 <h4 className="card-title text-center">S/.{product.price}</h4>
                   <p className="card-text">
-                    <button className= "btn" onClick={() => this.addToCart(product)}>Comprar</button>
+                    <button className= "btn" onClick={() => addToCart(product)}>Comprar</button>
                   </p>
                 </div>
               </div>
@@ -50,13 +42,23 @@ import {addToCart} from '../actionCreatores';
         </div>
         
       );
-    }
-  
-    addToCart(product) {
-
-      store.dispatch(addToCart(product));
-  
-    }
+   
   }
+
+    const mapStateToProps = state => {
+      return {
+        products: state.products
+      }
+    }
+    
+    const mapDispatchToProps = dispatch => {
+      return {
+        addToCart(product) {
+          dispatch(addToCart(product))
+        }
+      }
+    }
+
+    export default connect(mapStateToProps, mapDispatchToProps) (ProductList);
   
-  export default ProductList;
+    

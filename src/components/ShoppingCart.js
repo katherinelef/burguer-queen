@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './ShoppingCart.css';
-import store from '../store';
-import {removeFromCart} from '../actionCreatores';
+import { removeFromCart } from '../actionCreatores';
+import { connect } from 'react-redux';
 
 const styles = {
   footer: {
@@ -10,41 +10,26 @@ const styles = {
 }
 
 
-class ShoppingCart extends Component {
-  constructor() {
-    super();
-    this.removeFromCart = this.removeFromCart.bind(this);
-
-    this.state = {
-      cart: []
-    }
-
-    store.subscribe(() => {
-      this.setState({
-        cart: store.getState().cart
-      });
-    });
-  }
-
-  render() {
+const ShoppingCart = ({cart, removeFromCart}) => {
+  
     return (
       <div header="Shopping Cart" className="col-4">
 
-        <div fill>
+        <div>
 
           <div>
-            {this.state.cart.map(product =>
+            {cart.map(product =>
               <div key={product.id}>
                 <div>{product.name}</div>
                 <div className="text-right">${product.price}</div>
-                <div className="text-right"><button  onClick={() => this.removeFromCart(product)}>Eliminar</button></div>
+                <div className="text-right"><button  onClick={() => removeFromCart(product)}>Eliminar</button></div>
               </div>
             )}
           </div>
           <div>
             <div>
               <div colSpan="4" style={styles.footer}>
-                Total: ${this.state.cart.reduce((sum, product) => sum + product.price, 0)}
+                Total: ${cart.reduce((sum, product) => sum + product.price, 0)}
               </div>
             </div>
 
@@ -53,11 +38,22 @@ class ShoppingCart extends Component {
 
       </div>
     )
+
   }
 
-  removeFromCart(product) {
-    store.dispatch(removeFromCart(product));
+
+
+const mapStateToProps = state => {
+  return {
+    cart: state.cart 
   }
 }
 
-export default ShoppingCart;
+const mapDispatchToProps = dispatch => {
+  return {
+    removeFromCart(product) {
+      dispatch(removeFromCart(product))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps) (ShoppingCart);
